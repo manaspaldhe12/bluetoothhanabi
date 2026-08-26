@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>Hanabi</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Hanabi uses Bluetooth to connect with nearby players so you can play together.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Hanabi uses Bluetooth to connect with nearby players so you can play together.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Hanabi uses your local network to find and connect with nearby players.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_hanabi-game._tcp</string>
+		<string>_hanabi-game._udp</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
+</dict>
+</plist>

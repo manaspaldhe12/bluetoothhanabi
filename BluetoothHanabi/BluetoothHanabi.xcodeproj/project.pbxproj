@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27C58A32454148C8992B0AD3 /* BluetoothHanabiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732E89E3378745FA94819CAC /* BluetoothHanabiApp.swift */; };
+		A614363F300C4CA886C4C69B /* MultipeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6997E4B0B75D46458FB1E177 /* MultipeerManager.swift */; };
+		58CD34C73ABA4A34B0F25EA2 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167B288193394BE29B17F468 /* GameViewModel.swift */; };
+		380F618762224BBEBAF7D2B3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDFF1BB017841F7A8362587 /* CardView.swift */; };
+		110E67E2ACD14335817AC16B /* FireworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CCDE28B1664C7EB60184BD /* FireworksView.swift */; };
+		790672FB9C8C410AA98DC058 /* HandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5C40F8909547DB9D6E45B7 /* HandView.swift */; };
+		A7E7EDB23ED944FA8895A5C9 /* TokenTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66766B85A31346B1B82089C0 /* TokenTrackView.swift */; };
+		68762B33B4B94DA5AA011FDA /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A363C38CD254021A562434E /* GameOverView.swift */; };
+		6E84487300BB4FD593281063 /* GameTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8590D5FE75B94E22ACA91405 /* GameTableView.swift */; };
+		50EFC63B0A62436E8F641D20 /* HintSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540525F5E6D4910A5C558E1 /* HintSheetView.swift */; };
+		6B115C341A20432F8CB03315 /* JoinGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAABE8CAB1A14E2892E5EA47 /* JoinGameView.swift */; };
+		709184EAA13C439496DDB41D /* LobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6273E118A3734F549C2B7914 /* LobbyView.swift */; };
+		FDE028D2BA7E4E83BB0F587F /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9E8649E0641E29319FEB0 /* MainMenuView.swift */; };
+		B6C33E203C624DBC8C5103E2 /* NameEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3904E5E955CC432E94772356 /* NameEntryView.swift */; };
+		52393058E950427ABDFAB581 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED1AD8B58D94F1AB745E232 /* RootView.swift */; };
+		33448E1CDD6C43B192027AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DCB69B24CD147D6BE72BA0F /* Assets.xcassets */; };
+		DFE69FEA362E4B6A83E964D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42DE128EFFDB43ADA6FEC2F6 /* Preview Assets.xcassets */; };
+		DF39C7671C7546728C9F10CA /* HanabiKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8A9BA65EA5D471094A86392 /* HanabiKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		732E89E3378745FA94819CAC /* BluetoothHanabiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothHanabiApp.swift; sourceTree = "<group>"; };
+		6997E4B0B75D46458FB1E177 /* MultipeerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerManager.swift; sourceTree = "<group>"; };
+		167B288193394BE29B17F468 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		1DDFF1BB017841F7A8362587 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A0CCDE28B1664C7EB60184BD /* FireworksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireworksView.swift; sourceTree = "<group>"; };
+		AF5C40F8909547DB9D6E45B7 /* HandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandView.swift; sourceTree = "<group>"; };
+		66766B85A31346B1B82089C0 /* TokenTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTrackView.swift; sourceTree = "<group>"; };
+		1A363C38CD254021A562434E /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
+		8590D5FE75B94E22ACA91405 /* GameTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableView.swift; sourceTree = "<group>"; };
+		6540525F5E6D4910A5C558E1 /* HintSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintSheetView.swift; sourceTree = "<group>"; };
+		BAABE8CAB1A14E2892E5EA47 /* JoinGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameView.swift; sourceTree = "<group>"; };
+		6273E118A3734F549C2B7914 /* LobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyView.swift; sourceTree = "<group>"; };
+		4BD9E8649E0641E29319FEB0 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		3904E5E955CC432E94772356 /* NameEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameEntryView.swift; sourceTree = "<group>"; };
+		EED1AD8B58D94F1AB745E232 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		0DCB69B24CD147D6BE72BA0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
+		42DE128EFFDB43ADA6FEC2F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E1D2BC20A47E44F397C14D4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF87ACF44DC44D03A258F31B /* BluetoothHanabi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluetoothHanabi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C76F4ECD42CA42A996A94094 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF39C7671C7546728C9F10CA /* HanabiKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		704A47CDFC134791B2EACF6C = {
+			isa = PBXGroup;
+			children = (
+				000E976C752E4BED826DCF9F /* BluetoothHanabi */,
+				E1D2BC20A47E44F397C14D4C /* Info.plist */,
+				BE2447C1CDD743C6AA87CA09 /* Products */,
+				0D5D556F1D4343B79BC32C4A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		60FA91B3E14149C59F415197 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6997E4B0B75D46458FB1E177 /* MultipeerManager.swift */,
+			);
+			path = "Networking";
+			sourceTree = "<group>";
+		};
+		37D9298E6075467F964A2316 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				42DE128EFFDB43ADA6FEC2F6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9CEBD99F15E04CA7B397D1AB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				167B288193394BE29B17F468 /* GameViewModel.swift */,
+			);
+			path = "ViewModels";
+			sourceTree = "<group>";
+		};
+		740CB4B6A2DA463F88FF6DA1 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1DDFF1BB017841F7A8362587 /* CardView.swift */,
+				A0CCDE28B1664C7EB60184BD /* FireworksView.swift */,
+				AF5C40F8909547DB9D6E45B7 /* HandView.swift */,
+				66766B85A31346B1B82089C0 /* TokenTrackView.swift */,
+			);
+			path = "Components";
+			sourceTree = "<group>";
+		};
+		DCF95488C2AD4AE7AA985205 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				740CB4B6A2DA463F88FF6DA1 /* Components */,
+				1A363C38CD254021A562434E /* GameOverView.swift */,
+				8590D5FE75B94E22ACA91405 /* GameTableView.swift */,
+				6540525F5E6D4910A5C558E1 /* HintSheetView.swift */,
+				BAABE8CAB1A14E2892E5EA47 /* JoinGameView.swift */,
+				6273E118A3734F549C2B7914 /* LobbyView.swift */,
+				4BD9E8649E0641E29319FEB0 /* MainMenuView.swift */,
+				3904E5E955CC432E94772356 /* NameEntryView.swift */,
+				EED1AD8B58D94F1AB745E232 /* RootView.swift */,
+			);
+			path = "Views";
+			sourceTree = "<group>";
+		};
+		000E976C752E4BED826DCF9F /* BluetoothHanabi */ = {
+			isa = PBXGroup;
+			children = (
+				60FA91B3E14149C59F415197 /* Networking */,
+				37D9298E6075467F964A2316 /* Preview Content */,
+				9CEBD99F15E04CA7B397D1AB /* ViewModels */,
+				DCF95488C2AD4AE7AA985205 /* Views */,
+				0DCB69B24CD147D6BE72BA0F /* Assets.xcassets */,
+				732E89E3378745FA94819CAC /* BluetoothHanabiApp.swift */,
+			);
+			path = "BluetoothHanabi";
+			sourceTree = "<group>";
+		};
+		BE2447C1CDD743C6AA87CA09 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF87ACF44DC44D03A258F31B /* BluetoothHanabi.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0D5D556F1D4343B79BC32C4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FBB5F31D2574473B9A8A34A7 /* BluetoothHanabi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F7CC66ADCF4744D49119E4BB /* Build configuration list for PBXNativeTarget "BluetoothHanabi" */;
+			buildPhases = (
+				75AE5C1FB8244E6DA62A8F48 /* Sources */,
+				C76F4ECD42CA42A996A94094 /* Frameworks */,
+				F335A895EC8F415FB275490B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BluetoothHanabi;
+			packageProductDependencies = (
+				F8A9BA65EA5D471094A86392 /* HanabiKit */,
+			);
+			productName = BluetoothHanabi;
+			productReference = EF87ACF44DC44D03A258F31B /* BluetoothHanabi.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2932CD9636AE44F88DCF6BF5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					FBB5F31D2574473B9A8A34A7 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = EB8E0B71A52B48E99BA39E64 /* Build configuration list for PBXProject "BluetoothHanabi" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 704A47CDFC134791B2EACF6C;
+			packageReferences = (
+				AC1DD282B8A24F9CBD2DC71C /* XCLocalSwiftPackageReference "../HanabiKit" */,
+			);
+			productRefGroup = BE2447C1CDD743C6AA87CA09 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FBB5F31D2574473B9A8A34A7 /* BluetoothHanabi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F335A895EC8F415FB275490B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33448E1CDD6C43B192027AC7 /* Assets.xcassets in Resources */,
+				DFE69FEA362E4B6A83E964D1 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		75AE5C1FB8244E6DA62A8F48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27C58A32454148C8992B0AD3 /* BluetoothHanabiApp.swift in Sources */,
+				A614363F300C4CA886C4C69B /* MultipeerManager.swift in Sources */,
+				58CD34C73ABA4A34B0F25EA2 /* GameViewModel.swift in Sources */,
+				380F618762224BBEBAF7D2B3 /* CardView.swift in Sources */,
+				110E67E2ACD14335817AC16B /* FireworksView.swift in Sources */,
+				790672FB9C8C410AA98DC058 /* HandView.swift in Sources */,
+				A7E7EDB23ED944FA8895A5C9 /* TokenTrackView.swift in Sources */,
+				68762B33B4B94DA5AA011FDA /* GameOverView.swift in Sources */,
+				6E84487300BB4FD593281063 /* GameTableView.swift in Sources */,
+				50EFC63B0A62436E8F641D20 /* HintSheetView.swift in Sources */,
+				6B115C341A20432F8CB03315 /* JoinGameView.swift in Sources */,
+				709184EAA13C439496DDB41D /* LobbyView.swift in Sources */,
+				FDE028D2BA7E4E83BB0F587F /* MainMenuView.swift in Sources */,
+				B6C33E203C624DBC8C5103E2 /* NameEntryView.swift in Sources */,
+				52393058E950427ABDFAB581 /* RootView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DBFDA9EC2840437B954CD216 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		44177D2C39E746228DD66DBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4E1A541627AD4E6A8066F0E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BluetoothHanabi/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BluetoothHanabi/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.BluetoothHanabi";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		08648008D36E4462A9C84BF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BluetoothHanabi/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BluetoothHanabi/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.BluetoothHanabi";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB8E0B71A52B48E99BA39E64 /* Build configuration list for PBXProject "BluetoothHanabi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBFDA9EC2840437B954CD216 /* Debug */,
+				44177D2C39E746228DD66DBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F7CC66ADCF4744D49119E4BB /* Build configuration list for PBXNativeTarget "BluetoothHanabi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E1A541627AD4E6A8066F0E5 /* Debug */,
+				08648008D36E4462A9C84BF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		AC1DD282B8A24F9CBD2DC71C /* XCLocalSwiftPackageReference "../HanabiKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../HanabiKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F8A9BA65EA5D471094A86392 /* HanabiKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HanabiKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 2932CD9636AE44F88DCF6BF5 /* Project object */;
+}
