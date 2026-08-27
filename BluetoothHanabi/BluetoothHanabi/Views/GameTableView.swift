@@ -85,7 +85,7 @@ struct GameTableView: View {
     private var turnBanner: some View {
         VStack(spacing: 8) {
             if isMyTurn {
-                Text("Your turn").font(.title2.bold()).foregroundStyle(.accentColor)
+                Text("Your turn").font(.title2.bold()).foregroundStyle(Color.accentColor)
             } else {
                 Text("\(state.currentPlayer.name)'s turn").font(.title2.bold())
             }
@@ -105,7 +105,7 @@ struct GameTableView: View {
             HStack {
                 Text(player.name).font(.subheadline.bold())
                 if player.id == state.currentPlayer.id {
-                    Image(systemName: "arrow.right.circle.fill").foregroundStyle(.accentColor)
+                    Image(systemName: "arrow.right.circle.fill").foregroundStyle(Color.accentColor)
                 }
             }
             ScrollView(.horizontal, showsIndicators: false) {

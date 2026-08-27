@@ -12,7 +12,7 @@ struct GameOverView: View {
             Text(title).font(.largeTitle.bold())
             Text("\(state.score) / 25")
                 .font(.system(size: 40, weight: .heavy, design: .rounded))
-                .foregroundStyle(.accentColor)
+                .foregroundStyle(Color.accentColor)
             Text(reasonText)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)

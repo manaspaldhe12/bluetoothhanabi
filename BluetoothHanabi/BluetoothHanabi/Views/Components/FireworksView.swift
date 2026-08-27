@@ -17,7 +17,7 @@ struct FireworksView: View {
                         )
                     Text(played > 0 ? "\(played)" : "–")
                         .font(.system(size: 22, weight: .bold, design: .rounded))
-                        .foregroundStyle(played == 0 ? .secondary : (color == .white ? .black.opacity(0.7) : .white))
+                        .foregroundStyle(played == 0 ? Color.gray : (color == .white ? Color.black.opacity(0.7) : Color.white))
                 }
                 .frame(width: 46, height: 60)
             }

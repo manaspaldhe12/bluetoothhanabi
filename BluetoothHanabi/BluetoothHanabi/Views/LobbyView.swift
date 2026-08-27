@@ -12,7 +12,7 @@ struct LobbyView: View {
             List(viewModel.lobby.players) { player in
                 HStack {
                     Image(systemName: player.isHost ? "crown.fill" : "person.fill")
-                        .foregroundStyle(player.isHost ? .yellow : .secondary)
+                        .foregroundStyle(player.isHost ? Color.yellow : Color.gray)
                     Text(player.name)
                     if player.id == viewModel.localPlayerId {
                         Text("(you)").foregroundStyle(.secondary)
