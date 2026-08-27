@@ -54,49 +54,68 @@ SDK) — the `HanabiKit` engine was verified independently (`swift test`-equival
 layer was typechecked against the macOS SDK where APIs overlap, but **the app itself has not
 been built or run**, since that needs a full Xcode install. To build and run it:
 
-1. Open `BluetoothHanabi/BluetoothHanabi.xcodeproj` in Xcode (15+ recommended; deployment
-   target is iOS 16).
-2. Select the `BluetoothHanabi` target → Signing & Capabilities, and set your own Team (and
-   probably change `PRODUCT_BUNDLE_IDENTIFIER`, currently `com.example.BluetoothHanabi`, to
-   something under your own prefix).
-3. Build & run on two physical iOS devices for a real Bluetooth test. Simulators cannot do
-   real Bluetooth; two simulators (or a simulator + a device) on the same Wi-Fi network can
-   often still discover each other via MultipeerConnectivity's Wi-Fi/Bonjour path, but it's
-   not guaranteed — physical devices are the reliable way to test this.
-4. On one device tap **Host Game**; on the other tap **Join Game** and pick the host from the
-   list. Once 2+ players are in the lobby, the host can start.
+See "Install on your iPhone" below for two ways to get it onto a device — either sideload the
+`.ipa` GitHub Actions builds automatically (no Xcode needed), or build & run straight from
+Xcode. Either way you need it on **two physical devices** for a real Bluetooth test (deployment
+target is iOS 16; Xcode 15+ if building locally). Simulators cannot do real Bluetooth; two
+simulators (or a simulator + a device) on the same Wi-Fi network can often still discover each
+other via MultipeerConnectivity's Wi-Fi/Bonjour path, but it's not guaranteed — physical devices
+are the reliable way to test this.
+
+On one device tap **Host Game**; on the other tap **Join Game** and pick the host from the list.
+Once 2+ players are in the lobby, the host can start.
 
 To run just the engine's unit tests (fast, no simulator needed):
 ```bash
 cd HanabiKit && swift test
 ```
 
-## CI: building a signed .ipa via GitHub Actions
+## Install on your iPhone
 
-`.github/workflows/build-ipa.yml` builds and archives a signed `.ipa` on a `macos` runner and
-uploads it as a workflow artifact. It runs on every push to `main` and can also be triggered
-manually from the Actions tab. It needs your Apple Developer signing materials as **repo
-secrets** (Settings → Secrets and variables → Actions → New repository secret) — nothing here
-is usable without them:
+### Option A: Without Xcode — sideload the CI-built .ipa (free)
 
-| Secret | What it is |
-|---|---|
-| `BUILD_CERTIFICATE_BASE64` | Your distribution (or development) `.p12` certificate, base64-encoded: `base64 -i Certificate.p12 \| pbcopy` |
-| `P12_PASSWORD` | The password you set when exporting that `.p12` from Keychain Access |
-| `BUILD_PROVISION_PROFILE_BASE64` | The matching `.mobileprovision`, base64-encoded: `base64 -i Profile.mobileprovision \| pbcopy` |
-| `KEYCHAIN_PASSWORD` | Any password string — used only for a throwaway CI keychain |
-| `APPLE_TEAM_ID` | Your 10-character Apple Developer Team ID |
+Every push to `main` runs [`.github/workflows/build-ipa.yml`](.github/workflows/build-ipa.yml): a GitHub Actions macOS runner with a real Xcode install builds the app, runs the `HanabiKitTests` suite, and publishes an **unsigned** `.ipa` to a rolling `latest` release:
 
-The provisioning profile's App ID must match the bundle identifier the build uses. By default
-that's `com.example.BluetoothHanabi` (a placeholder — change it, either by editing
-`PRODUCT_BUNDLE_IDENTIFIER` in Xcode, or by setting an `IOS_BUNDLE_IDENTIFIER` repo **variable**
-to match your real App ID without touching the project). An `IOS_EXPORT_METHOD` repo variable
-(`development` | `ad-hoc` | `app-store` | `enterprise`) controls the export method; it defaults
-to `development`, which means the profile must list every device's UDID you want to install on
-(this repo's provisioning profile choice, not something the workflow can work around).
+```text
+https://github.com/manaspaldhe12/bluetoothhanabi/releases/download/latest/BluetoothHanabi.ipa
+```
 
-Once the secrets are set and a run finishes successfully, download the `.ipa` from the
-**Summary** page of that workflow run, under **Artifacts**.
+("Unsigned" here just means CI doesn't hold any Apple credentials — no certificate, provisioning profile, or Apple ID ever touches GitHub Actions. The sideloading tools below strip whatever signature is present and re-sign with your own identity regardless, so a CI-side signature would be pointless complexity.)
+
+You still need **some** computer (Mac or Windows, old or new — it does not need to run Xcode) to do the one-time pairing these tools require; after that, installs/updates can happen straight from your iPhone.
+
+**Using Sideloadly** (simpler, manual refresh every 7 days):
+
+1. Install [Sideloadly](https://sideloadly.io/) on any Mac or Windows computer.
+2. Download `BluetoothHanabi.ipa` from the link above.
+3. Connect your iPhone by USB, unlock it, and trust the computer if prompted.
+4. Open Sideloadly, drag `BluetoothHanabi.ipa` into it, select your device, enter your (free) Apple ID and password when prompted.
+5. Click **Start**. Sideloadly signs the app with a certificate generated from your Apple ID and installs it.
+6. On your iPhone: **Settings → General → VPN & Device Management**, tap your Apple ID under "Developer App", tap **Trust**.
+7. A **free** Apple ID's signature expires after **7 days** — after that the app won't open until you repeat steps 2–6 with a fresh `.ipa` from the same URL (it's always the latest build).
+
+**Using AltStore** (a bit more setup, then refreshes itself over Wi-Fi):
+
+1. Install [AltServer](https://altstore.io/) on a companion Mac or Windows computer and AltStore on your iPhone through it (AltStore's site walks through both — this is a one-time pairing step).
+2. Sign in with your free Apple ID when AltServer prompts for it.
+3. In AltStore on your iPhone, use **My Apps → +** and pick a downloaded `BluetoothHanabi.ipa`, or add a custom source pointing at the releases feed if you want in-app updates.
+4. Same 7-day free-tier limit applies, but AltServer/AltStore will try to auto-refresh the app in the background over Wi-Fi as long as AltServer is reachable (i.e. your companion computer is on and on the same network periodically) — less manual upkeep than Sideloadly once it's set up.
+
+Either way, sideloaded apps are capped at **3 apps signed under a free Apple ID at once**, and every player needs their own sideload of the app on their own phone — remove old test builds if you hit that limit.
+
+### Option B: Direct USB install via Xcode
+
+1. Open `BluetoothHanabi/BluetoothHanabi.xcodeproj` in Xcode, select the `BluetoothHanabi`
+   target → Signing & Capabilities, and set your own Team (and probably change
+   `PRODUCT_BUNDLE_IDENTIFIER`, currently `com.example.BluetoothHanabi`, to something under
+   your own prefix).
+2. Connect your iPhone by USB, unlock it, and select it from Xcode's device menu (not a
+   Simulator).
+3. Press **Run** (⌘R).
+4. On first launch, iOS may show **Untrusted Developer** — go to **Settings → General → VPN &
+   Device Management**, tap your developer profile, and choose **Trust**.
+
+Simulators cannot do real Bluetooth — physical devices are the reliable way to test multiplayer.
 
 ## Extending beyond 2 players
 
