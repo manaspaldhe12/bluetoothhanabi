@@ -25,7 +25,19 @@
 		33448E1CDD6C43B192027AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DCB69B24CD147D6BE72BA0F /* Assets.xcassets */; };
 		DFE69FEA362E4B6A83E964D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42DE128EFFDB43ADA6FEC2F6 /* Preview Assets.xcassets */; };
 		DF39C7671C7546728C9F10CA /* HanabiKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8A9BA65EA5D471094A86392 /* HanabiKit */; };
+		25CE4D8F81DC47338DA53BD4 /* MultipeerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56D2F5845446678C14E92C /* MultipeerManagerTests.swift */; };
+		6BC0FAF84DCE4898A44AD37B /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE252F403F0645D8921F0F6D /* GameViewModelTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		67248C06FAE14838B70BF651 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2932CD9636AE44F88DCF6BF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBB5F31D2574473B9A8A34A7;
+			remoteInfo = BluetoothHanabi;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		732E89E3378745FA94819CAC /* BluetoothHanabiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothHanabiApp.swift; sourceTree = "<group>"; };
@@ -47,6 +59,9 @@
 		42DE128EFFDB43ADA6FEC2F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E1D2BC20A47E44F397C14D4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF87ACF44DC44D03A258F31B /* BluetoothHanabi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluetoothHanabi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4FA46278A0D42A1BE9F16CF /* BluetoothHanabiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BluetoothHanabiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A56D2F5845446678C14E92C /* MultipeerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerManagerTests.swift; sourceTree = "<group>"; };
+		FE252F403F0645D8921F0F6D /* GameViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +73,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80BC75C897AA4E64B4E58B4E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -65,10 +87,20 @@
 			isa = PBXGroup;
 			children = (
 				000E976C752E4BED826DCF9F /* BluetoothHanabi */,
+				CA598A8139884C7CA84E18D6 /* BluetoothHanabiTests */,
 				E1D2BC20A47E44F397C14D4C /* Info.plist */,
 				BE2447C1CDD743C6AA87CA09 /* Products */,
 				0D5D556F1D4343B79BC32C4A /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		CA598A8139884C7CA84E18D6 /* BluetoothHanabiTests */ = {
+			isa = PBXGroup;
+			children = (
+				1A56D2F5845446678C14E92C /* MultipeerManagerTests.swift */,
+				FE252F403F0645D8921F0F6D /* GameViewModelTests.swift */,
+			);
+			path = "BluetoothHanabiTests";
 			sourceTree = "<group>";
 		};
 		60FA91B3E14149C59F415197 /* Networking */ = {
@@ -139,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				EF87ACF44DC44D03A258F31B /* BluetoothHanabi.app */,
+				A4FA46278A0D42A1BE9F16CF /* BluetoothHanabiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,6 +206,24 @@
 			productReference = EF87ACF44DC44D03A258F31B /* BluetoothHanabi.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B4E50BB2E61440F7A1D22381 /* BluetoothHanabiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DE49237B8DD49BD9D3C1CF1 /* Build configuration list for PBXNativeTarget "BluetoothHanabiTests" */;
+			buildPhases = (
+				9DA476ED9C2B4678B3B101D9 /* Sources */,
+				80BC75C897AA4E64B4E58B4E /* Frameworks */,
+				F0AB3EB7671346E4AA0F54B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B36E24F4274341ED81C35C05 /* PBXTargetDependency */,
+			);
+			name = BluetoothHanabiTests;
+			productName = BluetoothHanabiTests;
+			productReference = A4FA46278A0D42A1BE9F16CF /* BluetoothHanabiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -185,6 +236,10 @@
 				TargetAttributes = {
 					FBB5F31D2574473B9A8A34A7 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					B4E50BB2E61440F7A1D22381 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = FBB5F31D2574473B9A8A34A7;
 					};
 				};
 			};
@@ -205,6 +260,7 @@
 			projectRoot = "";
 			targets = (
 				FBB5F31D2574473B9A8A34A7 /* BluetoothHanabi */,
+				B4E50BB2E61440F7A1D22381 /* BluetoothHanabiTests */,
 			);
 		};
 /* End PBXProject section */
@@ -216,6 +272,13 @@
 			files = (
 				33448E1CDD6C43B192027AC7 /* Assets.xcassets in Resources */,
 				DFE69FEA362E4B6A83E964D1 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0AB3EB7671346E4AA0F54B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,7 +307,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9DA476ED9C2B4678B3B101D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25CE4D8F81DC47338DA53BD4 /* MultipeerManagerTests.swift in Sources */,
+				6BC0FAF84DCE4898A44AD37B /* GameViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B36E24F4274341ED81C35C05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBB5F31D2574473B9A8A34A7 /* BluetoothHanabi */;
+			targetProxy = 67248C06FAE14838B70BF651 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DBFDA9EC2840437B954CD216 /* Debug */ = {
@@ -414,6 +494,42 @@
 			};
 			name = Release;
 		};
+		40C196B3EA0347DDBB16E2AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.BluetoothHanabiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BluetoothHanabi.app/BluetoothHanabi";
+			};
+			name = Debug;
+		};
+		78060589E3ED4ED4871D05B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.BluetoothHanabiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BluetoothHanabi.app/BluetoothHanabi";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -431,6 +547,15 @@
 			buildConfigurations = (
 				4E1A541627AD4E6A8066F0E5 /* Debug */,
 				08648008D36E4462A9C84BF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DE49237B8DD49BD9D3C1CF1 /* Build configuration list for PBXNativeTarget "BluetoothHanabiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40C196B3EA0347DDBB16E2AC /* Debug */,
+				78060589E3ED4ED4871D05B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

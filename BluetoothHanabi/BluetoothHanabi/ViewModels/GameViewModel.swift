@@ -11,15 +11,19 @@ enum AppPhase: Equatable {
 
 @MainActor
 final class GameViewModel: ObservableObject {
-    @Published private(set) var phase: AppPhase = .menu
-    @Published private(set) var lobby = LobbyState(players: [])
-    @Published private(set) var gameState: GameState?
+    // Access is `internal` rather than `private(set)` so BluetoothHanabiTests (in the same
+    // module) can seed state directly via @testable import, without going through
+    // startHosting()/startBrowsingForHosts() — which would trigger real MultipeerConnectivity
+    // calls unsuitable for CI. Views never write these; only read them.
+    @Published var phase: AppPhase = .menu
+    @Published var lobby = LobbyState(players: [])
+    @Published var gameState: GameState?
     @Published var errorMessage: String?
     @Published private(set) var isConnectingToHost = false
 
     let manager: MultipeerManager
-    private(set) var isHost = false
-    private var hostGame: HostGame?
+    var isHost = false
+    var hostGame: HostGame?
 
     var localPlayerId: String { manager.myPeerId.displayName }
 
