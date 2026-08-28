@@ -45,6 +45,12 @@ final class GameViewModel: ObservableObject {
             guard let self else { return false }
             return self.lobby.players.count < LobbyState.maxPlayers
         }
+        manager.onFailedToStartAdvertising = { [weak self] error in
+            self?.errorMessage = "Couldn't start hosting (\(error.localizedDescription)). Check Settings → Privacy & Security → Local Network and make sure Hanabi is allowed."
+        }
+        manager.onFailedToStartBrowsing = { [weak self] error in
+            self?.errorMessage = "Couldn't search for games (\(error.localizedDescription)). Check Settings → Privacy & Security → Local Network and make sure Hanabi is allowed."
+        }
     }
 
     static func strippedName(_ peer: MCPeerID) -> String {

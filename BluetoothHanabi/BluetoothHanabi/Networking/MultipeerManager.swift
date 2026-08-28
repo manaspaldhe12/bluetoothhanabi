@@ -21,6 +21,11 @@ final class MultipeerManager: NSObject, ObservableObject {
     var onPeerDisconnected: ((MCPeerID) -> Void)?
     /// Consulted only while hosting, to cap the lobby at `LobbyState.maxPlayers`.
     var shouldAcceptInvitation: (() -> Bool)?
+    /// Fires when advertising/browsing fails to even start — most commonly a denied Local
+    /// Network permission. Without this, that failure is silent and the UI just hangs on
+    /// "Searching…" forever with no clue why.
+    var onFailedToStartAdvertising: ((Error) -> Void)?
+    var onFailedToStartBrowsing: ((Error) -> Void)?
 
     private var advertiser: MCNearbyServiceAdvertiser?
     private var browser: MCNearbyServiceBrowser?
@@ -115,6 +120,12 @@ extension MultipeerManager: MCNearbyServiceAdvertiserDelegate {
         let accept = shouldAcceptInvitation?() ?? true
         invitationHandler(accept, accept ? session : nil)
     }
+
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+        DispatchQueue.main.async {
+            self.onFailedToStartAdvertising?(error)
+        }
+    }
 }
 
 extension MultipeerManager: MCNearbyServiceBrowserDelegate {
@@ -129,6 +140,12 @@ extension MultipeerManager: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         DispatchQueue.main.async {
             self.availableHosts.removeAll { $0 == peerID }
+        }
+    }
+
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+        DispatchQueue.main.async {
+            self.onFailedToStartBrowsing?(error)
         }
     }
 }
