@@ -1,5 +1,7 @@
 # Bluetooth Hanabi
 
+**⬇️ [Download the latest build (BluetoothHanabi.ipa)](https://github.com/manaspaldhe12/bluetoothhanabi/releases/download/latest/BluetoothHanabi.ipa)** — unsigned, rebuilt automatically on every push to `main`. See [Install on your iPhone](#install-on-your-iphone) below for how to sideload it.
+
 A native iOS app for playing the cooperative card game [Hanabi](https://en.wikipedia.org/wiki/Hanabi_(card_game))
 with friends nearby, over Bluetooth/Wi-Fi (via MultipeerConnectivity) — no server, no internet
 required. Built for the standard 5-color game, 2 players first, extensible to 3–5.
