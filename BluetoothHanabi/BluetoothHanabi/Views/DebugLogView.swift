@@ -26,7 +26,7 @@ struct DebugLogView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
                 }
-                .onChange(of: manager.log.count) {
+                .onChange(of: manager.log.count) { _ in
                     if let lastIndex = manager.log.indices.last {
                         withAnimation {
                             proxy.scrollTo(lastIndex, anchor: .bottom)
