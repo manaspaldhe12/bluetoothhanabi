@@ -253,6 +253,174 @@ final class HanabiEngineTests: XCTestCase {
         }
     }
 
+    // MARK: - Finished-game guard
+
+    func testActionsAfterGameEndsThrowGameAlreadyFinished() throws {
+        let deck = orderedDeckForDealing(
+            aliceHand: [Card(color: .red, number: 5), Card(color: .red, number: 5)],
+            bobHand: [Card(color: .blue, number: 5), Card(color: .blue, number: 5)]
+        )
+        let game = HostGame(players: makePlayers(["alice", "bob"]), deck: deck)
+        try game.apply(.play(handIndex: 0), by: "alice")
+        try game.apply(.play(handIndex: 0), by: "bob")
+        try game.apply(.play(handIndex: 0), by: "alice") // 0 lives, game over
+        XCTAssertEqual(game.state.phase, .finished)
+
+        for action: GameAction in [.play(handIndex: 0), .discard(handIndex: 0), .hint(targetPlayerId: "bob", type: .number(1))] {
+            XCTAssertThrowsError(try game.apply(action, by: game.state.players[0].id)) { error in
+                XCTAssertEqual(error as? EngineError, .gameAlreadyFinished)
+            }
+        }
+    }
+
+    // MARK: - More invalid-input guards
+
+    func testDiscardInvalidHandIndexThrows() throws {
+        // Discard is blocked at max hint tokens (a fresh game's starting state), so spend one
+        // first (via a guaranteed-to-match hint) to make sure invalidHandIndex — not
+        // cannotDiscardAtMaxHintTokens — is what's actually being exercised.
+        let deck = orderedDeckForDealing(aliceHand: [Card(color: .red, number: 1)], bobHand: [Card(color: .blue, number: 1)])
+        let game = HostGame(players: makePlayers(["alice", "bob"]), deck: deck)
+        try game.apply(.hint(targetPlayerId: "bob", type: .color(.blue)), by: "alice")
+
+        XCTAssertThrowsError(try game.apply(.discard(handIndex: 99), by: "bob")) { error in
+            XCTAssertEqual(error as? EngineError, .invalidHandIndex)
+        }
+    }
+
+    func testHintUnknownTargetPlayerThrows() {
+        let game = twoPlayerGame()
+        XCTAssertThrowsError(try game.apply(.hint(targetPlayerId: "carol", type: .number(1)), by: "alice")) { error in
+            XCTAssertEqual(error as? EngineError, .unknownTargetPlayer)
+        }
+    }
+
+    // MARK: - Score edge cases
+
+    func testScoreForcedToZeroEvenIfStacksWerePlayedBeforeThirdMistake() throws {
+        // alice successfully plays red 1 and red 2 (raising the score to 2), then the team
+        // takes three guaranteed misplays. The official rule is score = 0 on a third mistake
+        // regardless of what was played beforehand. Equal-size hands (round-robin dealing can't
+        // give one player 2+ more cards than the other — see orderedDeckForDealing's docs) plus
+        // generous filler (so the deck doesn't run dry and end the game early via deckExhausted
+        // before these 5 turns complete).
+        let aliceInitial = [Card(color: .red, number: 1), Card(color: .red, number: 2), Card(color: .red, number: 5)]
+        let bobInitial = [Card(color: .blue, number: 5), Card(color: .blue, number: 5), Card(color: .blue, number: 1)]
+        let filler = (0..<12).map { _ in Card(color: .white, number: 1) }
+        let deck = orderedDeckForDealing(aliceHand: aliceInitial, bobHand: bobInitial, filler: filler)
+        let game = HostGame(players: makePlayers(["alice", "bob"]), deck: deck)
+
+        try game.apply(.play(handIndex: 0), by: "alice") // red 1: success
+        try game.apply(.play(handIndex: 0), by: "bob")   // blue5, needed=1: misplay, life 3->2
+        try game.apply(.play(handIndex: 0), by: "alice") // red 2: success, score now 2
+        try game.apply(.play(handIndex: 0), by: "bob")   // blue5 (2nd), needed still 1: misplay, life 2->1
+        try game.apply(.play(handIndex: 0), by: "alice") // red 5, needed=3: misplay, life 1->0
+
+        XCTAssertEqual(game.state.playedStacks[.red], 2, "the two successful plays still happened")
+        XCTAssertEqual(game.state.phase, .finished)
+        XCTAssertEqual(game.state.finishReason, .outOfLives)
+        XCTAssertEqual(game.state.score, 0, "official rule: 3 mistakes forces score to 0 regardless of stacks played")
+    }
+
+    func testBonusTokenNotAwardedBeyondMax() throws {
+        // Same red-race setup as testCompletingAStackAwardsBonusHintToken, but bob never
+        // spends a hint, so tokens are already at max when red completes.
+        let aliceInitial = (1...5).map { Card(color: .red, number: $0) }
+        let bobInitial = (1...5).map { Card(color: .yellow, number: $0) }
+        let dealTail = Self.dealTail(aliceInitial: aliceInitial, bobInitial: bobInitial)
+        let filler = (0..<12).map { _ in Card(color: .blue, number: 1) }
+        let game = HostGame(players: makePlayers(["alice", "bob"]), deck: filler + dealTail)
+        XCTAssertEqual(game.state.hintTokens, GameState.maxHintTokens)
+
+        for _ in 0..<4 {
+            try game.apply(.play(handIndex: 0), by: "alice")
+            try game.apply(.play(handIndex: 0), by: "bob")
+        }
+        try game.apply(.play(handIndex: 0), by: "alice") // red 5, completes the stack
+
+        XCTAssertEqual(game.state.playedStacks[.red], 5)
+        XCTAssertEqual(game.state.hintTokens, GameState.maxHintTokens, "already at max — nothing to refund")
+    }
+
+    // MARK: - Player lookups
+
+    func testPlayerLookupsReturnNilForUnknownId() {
+        let game = twoPlayerGame()
+        XCTAssertNil(game.state.player(withId: "carol"))
+        XCTAssertNil(game.state.playerIndex(withId: "carol"))
+        XCTAssertNotNil(game.state.player(withId: "alice"))
+        XCTAssertEqual(game.state.playerIndex(withId: "bob"), 1)
+    }
+
+    // MARK: - Hand size helper
+
+    func testHandSizeHelperBoundaries() {
+        XCTAssertEqual(GameState.handSize(forPlayerCount: 2), 5)
+        XCTAssertEqual(GameState.handSize(forPlayerCount: 3), 5)
+        XCTAssertEqual(GameState.handSize(forPlayerCount: 4), 4)
+        XCTAssertEqual(GameState.handSize(forPlayerCount: 5), 4)
+    }
+
+    // MARK: - Lobby boundaries
+
+    func testLobbyCanStartBoundaries() {
+        func lobby(_ count: Int) -> LobbyState {
+            LobbyState(players: (0..<count).map { LobbyPlayer(id: "p\($0)", name: "P\($0)", isHost: $0 == 0) })
+        }
+        XCTAssertFalse(lobby(1).canStart, "below minimum")
+        XCTAssertTrue(lobby(LobbyState.minPlayers).canStart)
+        XCTAssertTrue(lobby(LobbyState.maxPlayers).canStart)
+        XCTAssertFalse(lobby(LobbyState.maxPlayers + 1).canStart, "above maximum")
+    }
+
+    // MARK: - CardKnowledge narrowing, independent of the engine
+
+    func testCardKnowledgeNarrowsPossibleValuesAcrossMultipleHints() {
+        var knowledge = CardKnowledge()
+        XCTAssertEqual(knowledge.possibleColors, Set(CardColor.allCases))
+        XCTAssertEqual(knowledge.possibleNumbers, Set(1...5))
+
+        knowledge.apply(colorHint: .red, matched: false)
+        knowledge.apply(colorHint: .blue, matched: false)
+        XCTAssertEqual(knowledge.possibleColors, Set(CardColor.allCases).subtracting([.red, .blue]))
+        XCTAssertNil(knowledge.knownColor, "still ambiguous among the 3 remaining colors")
+
+        knowledge.apply(numberHint: 3, matched: true)
+        XCTAssertEqual(knowledge.knownNumber, 3)
+        XCTAssertEqual(knowledge.possibleNumbers, [3])
+
+        knowledge.apply(colorHint: .green, matched: true)
+        XCTAssertEqual(knowledge.knownColor, .green)
+        XCTAssertEqual(knowledge.possibleColors, [.green])
+    }
+
+    // MARK: - Multi-player turn rotation (3-5 players)
+
+    func testTurnOrderRotatesThroughAllPlayersAndWrapsAround() throws {
+        for playerCount in 3...5 {
+            let ids = (0..<playerCount).map { "p\($0)" }
+            let colors = Array(CardColor.displayOrder.prefix(playerCount))
+            // Player i's hand: their assigned color's 1, then that color's 2 — two guaranteed
+            // successful plays each, enough to observe two full laps around the table.
+            let hands = colors.map { color in [Card(color: color, number: 1), Card(color: color, number: 2)] }
+            let filler = (0..<20).map { _ in Card(color: .white, number: 1) }
+            let deck = orderedDeckForNPlayerDealing(hands: hands, filler: filler)
+            let game = HostGame(players: makePlayers(ids), deck: deck)
+
+            var observedOrder: [String] = []
+            for _ in 0..<(playerCount * 2) {
+                observedOrder.append(game.state.currentPlayer.id)
+                try game.apply(.play(handIndex: 0), by: game.state.currentPlayer.id)
+            }
+
+            XCTAssertEqual(observedOrder, ids + ids, "turn order for \(playerCount) players should visit everyone in order, twice")
+            for (index, color) in colors.enumerated() {
+                XCTAssertEqual(game.state.playedStacks[color], 2, "player \(index)'s color should have advanced to 2 via two successful plays")
+            }
+            XCTAssertEqual(game.state.lives, GameState.maxLives, "every play in this scenario was a guaranteed success")
+        }
+    }
+
     // MARK: - Deck exhaustion / final round
 
     func testDeckExhaustionTriggersFinalRoundThenEndsGame() throws {
@@ -302,13 +470,17 @@ final class HanabiEngineTests: XCTestCase {
     /// Builds a deck ordered so that, once dealt round-robin from the top, alice and bob end
     /// up with exactly the given hands (in hand order, index 0 first). Any remaining cards are
     /// appended as filler for subsequent draws, unless `filler` is supplied explicitly (pass
-    /// `[]` to leave the draw pile empty after the initial deal). Hands shorter than the
+    /// `[]` to leave the draw pile empty after the initial deal — but note that starves the
+    /// game of the finalRoundTurnsRemaining countdown almost immediately; use generous filler
+    /// for any test that needs more than ~2 turns per player). Hands shorter than the
     /// player-count-derived hand size simply deal out early, leaving the rest of that round's
-    /// slots unfilled — fine for tests that only touch the cards actually provided.
+    /// slots unfilled — fine for tests that only touch the cards actually provided. Real dealing
+    /// pops alice's card then bob's card *every* round regardless of who's "supposed" to be
+    /// done, so alice can end up at most 1 card ahead of bob — never 2+ — no matter how the
+    /// requested hand sizes differ; `aliceHand.count - bobHand.count` must be 0 or 1.
     private func orderedDeckForDealing(aliceHand: [Card], bobHand: [Card], filler: [Card]? = nil) -> [Card] {
-        // Real dealing pops alice's card then bob's card each round; since alice always goes
-        // first, she can never end up with fewer cards than bob.
         precondition(aliceHand.count >= bobHand.count)
+        precondition(aliceHand.count - bobHand.count <= 1, "round-robin dealing can't produce a gap of 2+ cards")
         var dealOrder: [Card] = []
         for i in 0..<aliceHand.count {
             dealOrder.append(aliceHand[i])
@@ -317,6 +489,25 @@ final class HanabiEngineTests: XCTestCase {
             }
         }
         var deck = filler ?? []
+        deck.append(contentsOf: dealOrder.reversed())
+        return deck
+    }
+
+    /// General N-player analog of `orderedDeckForDealing`: `hands[i]` is player i's hand (all
+    /// the same length), dealt round-robin in player order. Pass generous `filler` for any test
+    /// needing more than ~1 turn per player, or the draw pile empties immediately and the
+    /// finalRoundTurnsRemaining countdown ends the game a few turns later than expected.
+    private func orderedDeckForNPlayerDealing(hands: [[Card]], filler: [Card] = []) -> [Card] {
+        precondition(!hands.isEmpty)
+        let handSize = hands[0].count
+        precondition(hands.allSatisfy { $0.count == handSize })
+        var dealOrder: [Card] = []
+        for round in 0..<handSize {
+            for hand in hands {
+                dealOrder.append(hand[round])
+            }
+        }
+        var deck = filler
         deck.append(contentsOf: dealOrder.reversed())
         return deck
     }

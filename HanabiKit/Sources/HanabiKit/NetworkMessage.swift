@@ -28,7 +28,7 @@ public struct LobbyState: Codable, Equatable, Sendable {
 /// Everything sent over the MultipeerConnectivity session. Clients only ever send
 /// `.action` and `.joinRequest`; the host sends everything else. This keeps the protocol
 /// simple: the host is the only party allowed to mutate authoritative state.
-public enum NetworkMessage: Codable, Sendable {
+public enum NetworkMessage: Codable, Equatable, Sendable {
     case joinRequest(name: String)
     case lobbyUpdate(LobbyState)
     case gameStarted(GameState)
