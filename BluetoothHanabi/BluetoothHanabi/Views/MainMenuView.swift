@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MainMenuView: View {
     @ObservedObject var viewModel: GameViewModel
+    @State private var showingDebugLog = false
 
     var body: some View {
         VStack(spacing: 24) {
@@ -35,8 +36,14 @@ struct MainMenuView: View {
                 .font(.footnote)
                 .foregroundStyle(.secondary)
 
+            Button("Debug Log") { showingDebugLog = true }
+                .font(.footnote)
+
             Spacer()
         }
         .navigationBarBackButtonHidden(true)
+        .sheet(isPresented: $showingDebugLog) {
+            DebugLogView(manager: viewModel.manager)
+        }
     }
 }

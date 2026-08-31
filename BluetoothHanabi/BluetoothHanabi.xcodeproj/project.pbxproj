@@ -27,6 +27,7 @@
 		DF39C7671C7546728C9F10CA /* HanabiKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8A9BA65EA5D471094A86392 /* HanabiKit */; };
 		25CE4D8F81DC47338DA53BD4 /* MultipeerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56D2F5845446678C14E92C /* MultipeerManagerTests.swift */; };
 		6BC0FAF84DCE4898A44AD37B /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE252F403F0645D8921F0F6D /* GameViewModelTests.swift */; };
+		EDAAB32443FF470295D7AB15 /* DebugLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF3726DFD6F42399D49561E /* DebugLogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		4BD9E8649E0641E29319FEB0 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		3904E5E955CC432E94772356 /* NameEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameEntryView.swift; sourceTree = "<group>"; };
 		EED1AD8B58D94F1AB745E232 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		ABF3726DFD6F42399D49561E /* DebugLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLogView.swift; sourceTree = "<group>"; };
 		0DCB69B24CD147D6BE72BA0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
 		42DE128EFFDB43ADA6FEC2F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E1D2BC20A47E44F397C14D4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				740CB4B6A2DA463F88FF6DA1 /* Components */,
+				ABF3726DFD6F42399D49561E /* DebugLogView.swift */,
 				1A363C38CD254021A562434E /* GameOverView.swift */,
 				8590D5FE75B94E22ACA91405 /* GameTableView.swift */,
 				6540525F5E6D4910A5C558E1 /* HintSheetView.swift */,
@@ -304,6 +307,7 @@
 				FDE028D2BA7E4E83BB0F587F /* MainMenuView.swift in Sources */,
 				B6C33E203C624DBC8C5103E2 /* NameEntryView.swift in Sources */,
 				52393058E950427ABDFAB581 /* RootView.swift in Sources */,
+				EDAAB32443FF470295D7AB15 /* DebugLogView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

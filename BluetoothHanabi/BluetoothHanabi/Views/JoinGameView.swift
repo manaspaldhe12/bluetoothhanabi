@@ -2,6 +2,7 @@ import SwiftUI
 
 struct JoinGameView: View {
     @ObservedObject var viewModel: GameViewModel
+    @State private var showingDebugLog = false
 
     var body: some View {
         List {
@@ -41,6 +42,12 @@ struct JoinGameView: View {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") { viewModel.cancelBrowsing() }
             }
+            ToolbarItem(placement: .primaryAction) {
+                Button("Log") { showingDebugLog = true }
+            }
+        }
+        .sheet(isPresented: $showingDebugLog) {
+            DebugLogView(manager: viewModel.manager)
         }
     }
 }

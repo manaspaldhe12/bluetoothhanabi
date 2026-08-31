@@ -3,6 +3,7 @@ import HanabiKit
 
 struct LobbyView: View {
     @ObservedObject var viewModel: GameViewModel
+    @State private var showingDebugLog = false
 
     var body: some View {
         VStack(spacing: 20) {
@@ -52,6 +53,12 @@ struct LobbyView: View {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Leave") { viewModel.leaveGame() }
             }
+            ToolbarItem(placement: .primaryAction) {
+                Button("Log") { showingDebugLog = true }
+            }
+        }
+        .sheet(isPresented: $showingDebugLog) {
+            DebugLogView(manager: viewModel.manager)
         }
     }
 }
