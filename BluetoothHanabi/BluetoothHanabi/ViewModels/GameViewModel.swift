@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 import MultipeerConnectivity
 import HanabiKit
 
@@ -24,6 +25,7 @@ final class GameViewModel: ObservableObject {
     let manager: MultipeerManager
     var isHost = false
     var hostGame: HostGame?
+    private var cancellables = Set<AnyCancellable>()
 
     var localPlayerId: String { manager.myPeerId.displayName }
 
@@ -35,6 +37,14 @@ final class GameViewModel: ObservableObject {
         displayPlayerName = trimmed.isEmpty ? "Player" : trimmed
         let suffix = String(UUID().uuidString.prefix(4))
         manager = MultipeerManager(displayName: "\(displayPlayerName)#\(suffix)")
+
+        // GameViewModel.availableHosts is just a computed pass-through to manager.availableHosts.
+        // Without this, MultipeerManager publishing a change (e.g. finding a peer) never tells
+        // SwiftUI to re-render views that only observe `viewModel` — they'd stay frozen on
+        // whatever they first rendered, even though the underlying data changed underneath them.
+        manager.objectWillChange
+            .sink { [weak self] _ in self?.objectWillChange.send() }
+            .store(in: &cancellables)
 
         manager.onReceiveMessage = { [weak self] message, peer in
             self?.handle(message, from: peer)

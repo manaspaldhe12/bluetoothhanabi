@@ -1,4 +1,5 @@
 import XCTest
+import Combine
 import MultipeerConnectivity
 import HanabiKit
 @testable import BluetoothHanabi
@@ -218,5 +219,32 @@ final class GameViewModelTests: XCTestCase {
 
         XCTAssertNotNil(vm.errorMessage)
         XCTAssertTrue(vm.errorMessage?.contains("denied") ?? false)
+    }
+
+    // MARK: - Regression: manager changes must propagate to views observing only the view model
+
+    /// `availableHosts` is a plain computed pass-through to `manager.availableHosts`. A view
+    /// that only holds `@ObservedObject var viewModel: GameViewModel` (as JoinGameView does)
+    /// re-renders when *GameViewModel's own* objectWillChange fires — not when a nested
+    /// ObservableObject changes independently. Without forwarding manager's publisher, finding
+    /// a peer would update the underlying data but never tell SwiftUI to re-render, leaving the
+    /// UI frozen on an empty list forever even though discovery genuinely succeeded.
+    func testFindingAPeerNotifiesViewModelObservers() {
+        let vm = GameViewModel(playerName: "Alice")
+        let browser = MCNearbyServiceBrowser(peer: vm.manager.myPeerId, serviceType: MultipeerManager.serviceType)
+        let hostPeer = MCPeerID(displayName: "Host#0000")
+
+        var notified = false
+        let cancellable = vm.objectWillChange.sink { notified = true }
+        defer { cancellable.cancel() }
+
+        vm.manager.browser(browser, foundPeer: hostPeer, withDiscoveryInfo: nil)
+
+        let exp = expectation(description: "flush")
+        DispatchQueue.main.async { exp.fulfill() }
+        wait(for: [exp], timeout: 2.0)
+
+        XCTAssertTrue(notified, "GameViewModel.objectWillChange should fire when manager.availableHosts changes")
+        XCTAssertEqual(vm.availableHosts, [hostPeer])
     }
 }
